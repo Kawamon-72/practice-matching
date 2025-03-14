@@ -1,6 +1,6 @@
 # practice-matching
 ### 画面遷移図
-Figma：https://www.figma.com/design/fxT281HkCc1jgIPk6fcBBx/Untitled?node-id=0-1&p=f&t=ucob7PqkjpBKij2H-0
+Figma：https://www.figma.com/design/fxT281HkCc1jgIPk6fcBBx/Untitled?node-id=0-1&p=f&t=ucob7PqkjpBKij2H-0n遷移n遷移
 
 RUNTEQ卒業制作 練習試合のマッチング機能のアプリです。
 ■サービス概要
