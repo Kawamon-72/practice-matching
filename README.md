@@ -1,6 +1,7 @@
 # practice-matching
-### 画面遷移図
-Figma：https://www.figma.com/design/fxT281HkCc1jgIPk6fcBBx/Untitled?node-id=0-1&p=f&t=ucob7PqkjpBKij2H-0
+ER図URL：https://lucid.app/lucidchart/63f551d6-d24e-4460-8202-9db210b61a4c/edit?viewport_loc=-12404%2C-695%2C3395%2C1545%2C0_0&invitationId=inv_fdb70c90-cf0f-4c09-9ac3-709e176c2907
+
+画面遷移図　Figma：https://www.figma.com/design/fxT281HkCc1jgIPk6fcBBx/Untitled?t=htZJXzEhUSLsIXCo-0
 
 RUNTEQ卒業制作 練習試合のマッチング機能のアプリです。
 ■サービス概要
@@ -51,8 +52,8 @@ RUNTEQ卒業制作 練習試合のマッチング機能のアプリです。
 
 MVPリリース:マッチング機能、チャット機能、ログイン・ログアウト機能、パスワードリセット機能、ユーザー登録機能
 本リリース：グループ機能（ユーザーを集めてミーティング、日程調整できる機能、練習試合のマッチングもできるようにする、相手とのチャットもできるようにする、相手を友達に登録できるようにもする）、権限管理（管理者・一般ユーザーの区別）
-　　　　　　問い合わせ機能、利用規約、プライバシーポリシーページ、友達登録機能、友達とのチャット機能
-
+          問い合わせ機能、利用規約、プライポリシーページ、友達登録機能、友達とのチャット機能
+         
 
 ■ 機能の実装方針予定
 一般的なCRUD以外の実装予定の機能についてそれぞれどのようなイメージ(使用するAPIや)で実装する予定なのか現状考えているもので良いので教えて下さい。
