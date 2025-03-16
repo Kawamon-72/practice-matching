@@ -1,4 +1,7 @@
 # practice-matching
+ER図URL：https://lucid.app/lucidchart/63f551d6-d24e-4460-8202-9db210b61a4c/edit?viewport_loc=-12404%2C-695%2C3395%2C1545%2C0_0&invitationId=inv_fdb70c90-cf0f-4c09-9ac3-709e176c2907
+
+
 RUNTEQ卒業制作 練習試合のマッチング機能のアプリです。
 ■サービス概要
 どんなサービスなのかを３行で説明してください。
