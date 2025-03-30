@@ -5,4 +5,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-};
+}; //紛争を防止するため

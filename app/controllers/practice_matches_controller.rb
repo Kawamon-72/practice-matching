@@ -65,7 +65,7 @@ class PracticeMatchesController < ApplicationController
       @practice_match = PracticeMatch.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
+    # Only allow a list of trusted parameters through.コメント ストパラフォームのやつも作成？
     def practice_match_params
       params.expect(practice_match: [ :schedule, :place, :number_of_accept, :remarks, :created_at, :updated_at, :prefecture, :city, :genre_generation[], :sports ])
     end
