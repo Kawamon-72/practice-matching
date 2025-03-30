@@ -11,7 +11,9 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.13",
+    "@popperjs/core": "^2.11.8",
     "@tailwindcss/cli": "^4.0.14",
+    "bootstrap": "^5.3.3",
     "tailwindcss": "^4.0.14"
   }
 }

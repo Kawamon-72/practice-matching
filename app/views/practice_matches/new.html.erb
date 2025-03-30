@@ -1,0 +1,11 @@
+<% content_for :title, "New practice match" %>
+
+<h1>New practice match</h1>
+
+<%= render "form", practice_match: @practice_match %>
+
+<br>
+
+<div>
+  <%= link_to "Back to practice matches", practice_matches_path %>
+</div>

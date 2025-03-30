@@ -1,0 +1,2 @@
+class PracticeMatch < ApplicationRecord
+end

@@ -1,0 +1,11 @@
+@import "bootstrap/scss/bootstrap";
+
+.menu-content {
+    display: flex; /* 横並びにするためにflexboxを使う */
+    justify-content: center; /* 中央揃えにしたい場合 */
+    align-items: center; /* 垂直方向の中央揃え */
+}
+  
+.icon-link {
+    margin: 0 10px; /* アイコン同士の間隔を調整 */
+}
