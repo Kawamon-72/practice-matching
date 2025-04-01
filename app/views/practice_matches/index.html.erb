@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Practice matching" %>
+<% if !logged_in? %>
+  <h1>Practice matching</h1>
+  <P>練習試合のマッチングアプリです。<br>
+     練習試合の募集に対して応募できたり<br>
+     募集をかけることができます！<br>
+     以下使い方になります！！</p>
+<% end %>
+
+<%= render 'form', q: @q, url: practice_matches_path %>
+
+<div id="practice_matches">
+  <% @practice_matches.each do |practice_match| %>
+    <%= render practice_match %>
+    <p>
+      <%= link_to "応募", '#' , class: 'btn' %>
+      <%= link_to "詳細", '#' , class: 'btn' %>
+    </p>
+  <% end %>
+</div>
+
+<% if !logged_in? %>
+ <p>ログイン・新規登録をして始めましょう！</p>
+ <%= link_to "ログイン", '#' , class: 'btn' %>
+ <%= link_to "新規登録", '#' , class: 'btn' %>
+<% end %>

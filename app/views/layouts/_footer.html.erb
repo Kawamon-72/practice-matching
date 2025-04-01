@@ -1,0 +1,15 @@
+<div class="menu-content">
+  <% if !logged_in? %>
+    <h1>Practice Matching!@2025</h1>
+  <% else %>
+    <%= link_to '<i class="fas fa-home"></i>'.html_safe, '#', class: "icon-link" %>
+
+    <%= link_to '募集', '#', class: "button icon-link" %>
+
+    <%= link_to '<i class="fas fa-bell"></i>'.html_safe, '#', class: "icon-link" %>
+    
+    <%= link_to '<i class="fas fa-comments"></i>'.html_safe, '#', class: "icon-link" %>
+    
+    <%= link_to '<i class="fas fa-user"></i>'.html_safe, '#', class: "icon-link" %>
+  <% end %>
+</div>

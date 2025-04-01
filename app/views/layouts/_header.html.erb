@@ -1,0 +1,34 @@
+<div class="hamburger-menu">
+ <div class="menu-content">
+   <% if !logged_in? %>
+     <ul>
+      <li>
+        <%= link_to 'ログイン', '#' %>
+      </li>
+      <li>
+        <%= link_to '新規登録', '#' %>
+      </li>
+      <li>
+        <%= link_to 'パスワードを忘れた方', '#' %>
+      </li>
+      <li>
+        <%= link_to '利用規約', '#' %>
+      </li>
+      <li>
+        <%= link_to 'プライバシーポリシー', '#' %>
+      </li>
+     </ul>
+   <% else %>
+     <ul>
+      <li>
+        <%= link_to 'ログアウト', '#' %>
+      </li>
+      <li>
+        <%= link_to '利用規約', '#' %>
+      </li>
+      <li>
+        <%= link_to 'プライバシーポリシー', '#' %>
+      </li>
+     </ul>  
+   <% end %>
+</div>

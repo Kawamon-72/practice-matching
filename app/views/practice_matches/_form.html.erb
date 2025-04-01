@@ -1,0 +1,40 @@
+<%= search_form_for @q, url: url do |form| %>
+  <% if practice_match.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(practice_match.errors.count, "error") %> prohibited this practice_match from being saved:</h2>
+
+      <ul>
+        <% practice_match.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class = 'form-group'>
+    <label for = "prefecture">都道府県</label>
+    <%= form.search_field :prefecture, class: 'form-control', placeholder: t('東京'), style: "display: block" %>
+
+    <label for = "city">市町村</label>
+    <%= form.search_field :city, class: 'form-control', placeholder: t('横浜'), style: "display: block" %>
+
+    <label for = "genre_generation">年代</label>
+    <%= form.search_field :genre_generation, class: 'form-control', placeholder: t('スポ少、小学生'), style: "display: block" %>
+
+    <label for = "sports">競技</label>
+    <%= form.search_field :sports, class: 'form-control', placeholder: t('サッカー'), style: "display: block" %>
+
+    <label for = "schedule">日にち</label>
+    <%= form.search_field :schedule, class: 'form-control', placeholder: t('◯◯24/02/07'), style: "display: block" %>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      flatpickr("#schedule", {
+      dateFormat: "Y-m-d", // 日付のフォーマットを設定
+    });
+  });
+  </script>
+    
+  <%= form.submit '検索', class: 'bin btn-primary' %>
+<% end %>
