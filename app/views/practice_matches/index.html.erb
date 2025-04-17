@@ -1,3 +1,5 @@
+<%= render 'layouts/header' %>
+
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Practice matching" %>
@@ -9,7 +11,7 @@
      以下使い方になります！！</p>
 <% end %>
 
-<%= render 'form', q: @q, url: practice_matches_path %>
+<%= render 'form', practice_match: @practice_match, q: @q, url: practice_matches_path %>
 
 <div id="practice_matches">
   <% @practice_matches.each do |practice_match| %>
@@ -23,6 +25,19 @@
 
 <% if !logged_in? %>
  <p>ログイン・新規登録をして始めましょう！</p>
- <%= link_to "ログイン", '#' , class: 'btn' %>
- <%= link_to "新規登録", '#' , class: 'btn' %>
+ <%= link_to "ログイン", login_path , class: 'btn' %>
+ <%= link_to "新規登録", new_user_path , class: 'btn' %>
 <% end %>
+
+<%= render 'layouts/footer' %>
+
+<style>
+    .btn {
+      margin: 30px 15px;
+      padding: 10px 15px;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+      border-radius: 4px;
+      background-color: #faa61a;
+      color: white;
+    }
+</style>
