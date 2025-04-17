@@ -1,9 +1,10 @@
 class PracticeMatchesController < ApplicationController
   before_action :set_practice_match, only: %i[ show edit update destroy ]
-
+  skip_before_action :require_login, only: %i[index]
   # GET /practice_matches or /practice_matches.json
   def index
     @q = PracticeMatch.ransack(params[:q])
+    @practice_matches = @q.result(distinct: true).includes(:user)
   end
 
   # GET /practice_matches/1 or /practice_matches/1.json
@@ -67,6 +68,6 @@ class PracticeMatchesController < ApplicationController
 
     # Only allow a list of trusted parameters through.コメント ストパラフォームのやつも作成？
     def practice_match_params
-      params.expect(practice_match: [ :schedule, :place, :number_of_accept, :remarks, :created_at, :updated_at, :prefecture, :city, :genre_generation[], :sports ])
+      params.require(:practice_match).permit(:schedule, :place, :number_of_accept, :remarks, :created_at, :updated_at, :prefecture, :city, :genre_generation[], :sports)
     end
 end

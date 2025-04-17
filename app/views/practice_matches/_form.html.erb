@@ -1,5 +1,5 @@
 <%= search_form_for @q, url: url do |form| %>
-  <% if practice_match.errors.any? %>
+  <% if practice_match.present? && practice_match.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(practice_match.errors.count, "error") %> prohibited this practice_match from being saved:</h2>
 
@@ -12,21 +12,55 @@
   <% end %>
 
   <div class = 'form-group'>
-    <label for = "prefecture">都道府県</label>
+    <label for="prefecture" class="form-label">都道府県</label>
     <%= form.search_field :prefecture, class: 'form-control', placeholder: t('東京'), style: "display: block" %>
 
-    <label for = "city">市町村</label>
+    <label for = "city" class="form-label">市町村</label>
     <%= form.search_field :city, class: 'form-control', placeholder: t('横浜'), style: "display: block" %>
 
-    <label for = "genre_generation">年代</label>
+    <label for = "genre_generation" class="form-label">年代</label>
     <%= form.search_field :genre_generation, class: 'form-control', placeholder: t('スポ少、小学生'), style: "display: block" %>
 
-    <label for = "sports">競技</label>
+    <label for = "sports" class="form-label">競技</label>
     <%= form.search_field :sports, class: 'form-control', placeholder: t('サッカー'), style: "display: block" %>
 
-    <label for = "schedule">日にち</label>
+    <label for = "schedule" class="form-label">日にち</label>
     <%= form.search_field :schedule, class: 'form-control', placeholder: t('◯◯24/02/07'), style: "display: block" %>
   </div>
+
+   <%= form.submit '検索', class: 'bin btn-primary' %>
+<% end %>
+
+  <style>
+    .bin {
+      margin: 10px 15px;
+      padding: 10px 15px;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+      border-radius: 4px;
+      background-color: #faa61a;
+      color: white;
+
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: row;
+      align-items:
+      margin-bottom: 15px;
+    }
+
+    .form-label {
+      display: block; /* ラベルをブロック要素にして改行させる */ /* ラベルを太字にする（オプション） */
+    }
+
+    .form-control {
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+      border-radius: 4px; /* 角を丸くする */
+      padding: 8px; /* 内側の余白を追加 */
+      width: 100%; /* 幅を100%にして親要素にフィットさせる */
+      box-sizing: border-box; /* ボーダーやパディングを含めた幅計算 */
+    }
+  </style>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -35,6 +69,3 @@
     });
   });
   </script>
-    
-  <%= form.submit '検索', class: 'bin btn-primary' %>
-<% end %>
