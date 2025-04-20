@@ -1,39 +1,116 @@
 <p style="color: green"><%= notice %></p>
 
-<div class="container pt-3">
+<div class="container-profile pt-3">
   <div class="row">
     <div class="col-md-10 offset-md-1">
-      <h1 class="float-left mb-5"><%= t('.title') %></h1>
-      <%= link_to t('defaults.edit'), edit_profile_path, class: 'btn btn-success float-right' %>
+      <h1 class="float-left mb-20"><%= t('プロフィール詳細画面') %></h1>
       <table class="table">
         <tr>
-          <th scope="row"><%= Profile.human_attribute_name(:name) %></th>
-          <td><%= current_user.profile.name %></td>
+          <th scope="row" class="name"><%= Profile.human_attribute_name(:チーム名) %></th>
+          <td class="td-name"><%= current_user.profile.name %></td>
         </tr>
         <tr>
-          <th scope="row"><%= Profile.human_attribute_name(:location) %></th>
-          <td><%= current_user.profile.location %></td>
+          <th scope="row" class="location"><%= Profile.human_attribute_name(:所在地) %></th>
+          <td class="td-location"><%= current_user.profile.location %></td>
         </tr>
         <tr>
-          <th scope="row"><%= Profile.human_attribute_name(:genre_generation_tags) %></th>
-          <td><%= current_user.profile.genre_generation_tags.map(&:name).join(', ') %></td>
+          <th scope="row" class= "genre"><%= Profile.human_attribute_name(:ジャンル（年代）) %></th>
+          <td class= "td-genre"><%= current_user.profile.genre_generation_tags.map(&:name).join(', ') %></td>
         </tr>
         <tr>
-          <th scope="row"><%= Profile.human_attribute_name(:sports_tags_name) %></th>
-          <td><%= current_user.profile.sports_tags.map(&:name).join(', ') %></td>
+          <th scope="row" class="sports"><%= Profile.human_attribute_name(:競技名) %></th>
+          <td class="td-sports"><%= current_user.profile.sports_tags.map(&:name).join(', ') %></td>
         </tr>
         <tr>
-          <th scope="row"><%= Profile.human_attribute_name(:introduction) %></th>
-          <td><%= current_user.profile.introduction %></td>
+          <th scope="row" class="introduction"><%= Profile.human_attribute_name(:紹介文) %></th>
+          <td class="td-introduction"><%= current_user.profile.introduction %></td>
         </tr>
         <tr>
-          <th scope="row"><%= Profile.human_attribute_name(:avatar) %></th>
+          <th scope="row"><%= Profile.human_attribute_name(:画像) %></th>
           <td><%= image_tag current_user.profile.avatar.url, class: 'rounded-circle', size: '100x100' %></td>
         </tr>
       </table>
 
-    <%= link_to "編集", edit_path %>
-    <%= link_to "ホーム", root_path %>
+    <div class="d-flex justify-content-between">
+        <%= link_to "編集", edit_profile_path, class: 'btn btn-primary' %>
+        <%= link_to "ホーム", root_path, class: 'btn btn-primary' %>
     </div>
   </div>
 </div>
+
+<style>
+    .bin {
+      margin: 10px 15px;
+      padding: 10px 15px;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+      border-radius: 4px;
+      background-color: #faa61a;
+      color: white;
+    }
+
+    .name {
+      margin:10px 0px 0px 0px;
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+    }
+
+    .td-name {
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc;
+    }
+
+    .location {
+      margin:10px 0px 0px 0px;
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+    }
+
+    .td-location {
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc;
+    }
+
+    .genre {
+      margin:10px 0px 0px 0px;
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+    }
+
+    .td-genre {
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc;
+    }
+
+    .sports {
+      margin:10px 0px 0px 0px;
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+    }
+
+    .td-sports {
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc;
+    }
+
+    .introduction {
+      margin:10px 0px 0px 0px;
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+    }
+
+    .td-introduction {
+      display: block;
+      background-color: #faa61a;
+      border: 1px solid #ccc;
+    }
+
+</style>    
