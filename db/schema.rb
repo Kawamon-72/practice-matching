@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_19_074156) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_24_111240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "city_tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "genre_generation_tags", force: :cascade do |t|
     t.string "name"
@@ -25,6 +31,32 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_19_074156) do
     t.text "place"
     t.integer "number_of_accept"
     t.text "remarks"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_practice_matches_on_user_id"
+  end
+
+  create_table "practice_matches_cities", force: :cascade do |t|
+    t.bigint "practice_match_id", null: false
+    t.bigint "city_tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_tag_id"], name: "index_practice_matches_cities_on_city_tag_id"
+    t.index ["practice_match_id"], name: "index_practice_matches_cities_on_practice_match_id"
+  end
+
+  create_table "practice_matches_prefectures", force: :cascade do |t|
+    t.bigint "practice_match_id", null: false
+    t.bigint "prefecture_tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["practice_match_id"], name: "index_practice_matches_prefectures_on_practice_match_id"
+    t.index ["prefecture_tag_id"], name: "index_practice_matches_prefectures_on_prefecture_tag_id"
+  end
+
+  create_table "prefecture_tags", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -68,6 +100,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_19_074156) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "practice_matches", "users"
+  add_foreign_key "practice_matches_cities", "city_tags"
+  add_foreign_key "practice_matches_cities", "practice_matches"
+  add_foreign_key "practice_matches_prefectures", "practice_matches"
+  add_foreign_key "practice_matches_prefectures", "prefecture_tags"
   add_foreign_key "profile_genre_generations", "genre_generation_tags"
   add_foreign_key "profile_genre_generations", "profiles"
   add_foreign_key "profile_sports", "profiles"

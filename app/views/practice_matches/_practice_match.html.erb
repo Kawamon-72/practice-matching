@@ -1,7 +1,22 @@
 <div id="<%= dom_id practice_match %>">
   <p>
+    <strong>チーム名:</strong>
+    <% if practice_match.user && practice_match.user.profile && practice_match.user.profile.name.present? %>
+      <%= practice_match.user.profile.name %>
+    <% else %>
+      未設定
+    <% end %>
+  </p>
+
+  <p>
     <strong>Sports:</strong>
-    <%= practice_match.sports %>
+    <% if practice_match.user && practice_match.user.profile && practice_match.user.profile.sports_tags.present? %>
+      <%= practice_match.user.profile.sports_tags.map(&:name).join(", ") %>
+    <% else %>
+      未設定
+    <% end %>
+  </p>
+
   </p>
 
   <p>
@@ -12,5 +27,10 @@
   <p>
     <strong>Place:</strong>
     <%= practice_match.place %>
+  </p>
+
+  <p>
+      <%= link_to "応募", '#' , class: 'btn' %>
+      <%= link_to "詳細", practice_match_path(practice_match), class: 'btn' %>
   </p>
 </div>

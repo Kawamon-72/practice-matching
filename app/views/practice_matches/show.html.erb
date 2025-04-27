@@ -1,10 +1,56 @@
-<p style="color: green"><%= notice %></p>
+<div class="practice-match-details container my-4">
+  <h2 class="mb-4 text-center">練習試合の詳細</h2>
 
-<%= render @practice_match %>
+  <div class="card p-4 shadow-sm">
+    <div class="mb-3">
+      <strong>チーム名：</strong>
+      <%= @practice_match.user&.profile&.name || "未設定" %>
+    </div>
 
-<div>
-  <%= link_to "Edit this practice match", edit_practice_match_path(@practice_match) %> |
+    <div class="mb-3">
+      <strong>ジャンル（年代）：</strong>
+      <%= @practice_match.user&.profile&.genre_generation_tags&.map(&:name)&.join(', ') || "未設定" %>
+    </div>
+
+    <div class="mb-3">
+      <strong>競技：</strong>
+      <%= @practice_match.user&.profile&.sports_tags&.map(&:name)&.join(', ') || "未設定" %>
+    </div>
+
+    <div class="mb-3">
+      <strong>日にち：</strong>
+      <%= @practice_match.schedule.strftime('%Y年%m月%d日') if @practice_match.schedule.present? %>
+    </div>
+
+    <div class="mb-3">
+      <strong>場所：</strong>
+      <%= @practice_match.place %>
+    </div>
+
+    <div class="mb-3">
+      <strong>都道府県：</strong>
+      <%= @practice_match.prefecture_tags.map(&:name)&.join(', ') || "未設定" %>
+    </div>
+
+    <div class="mb-3">
+      <strong>市区町村：</strong>
+      <%= @practice_match.city_tags.map(&:name)&.join(', ') || "未設定" %>
+    </div>
+
+    <div class="mb-3">
+      <strong>備考：</strong>
+      <div class="border rounded p-2 bg-light">
+        <%= simple_format(@practice_match.remarks.presence || "備考はありません。") %>
+      </div>
+    </div>
+  </div>
+  <% if current_user && @practice_match.user_id == current_user.id %>
+    <%= link_to "編集", edit_practice_match_path(@practice_match), class: "btn" %> |
+    <%= button_to "削除", @practice_match, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn" %>
+  <% end %>
+</div>
+
+
+<div> 
   <%= link_to "Back to practice matches", practice_matches_path %>
-
-  <%= button_to "Destroy this practice match", @practice_match, method: :delete %>
 </div>
