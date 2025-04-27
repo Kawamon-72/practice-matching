@@ -1,0 +1,84 @@
+<%= form_with model: @practice_match, local: true, multipart: true, html: { class: 'practice-match-form' } do |f| %>
+  <% if @practice_match.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(@practice_match.errors.count, "件のエラー") %>があります：</h2>
+      <ul>
+        <% @practice_match.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group mb-3">
+    <%= f.label :schedule, "日にち", class: 'form-label' %>
+    <%= f.date_field :schedule, class: 'form-control match-date' %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= f.label :place, "場所（会場名など）", class: 'form-label' %>
+    <%= f.text_field :place, class: 'form-control match-location' %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= f.label :prefecture_tag_name, "都道府県", class: 'form-label' %>
+    <%= f.text_field :prefecture_tag_name, class: 'form-control prefecture-tag' %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= f.label :city_tag_name, "市区町村", class: 'form-label' %>
+    <%= f.text_field :city_tag_name, class: 'form-control city-tag' %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= f.label :remarks, "備考", class: 'form-label' %>
+    <%= f.text_area :remarks, class: 'form-control note-textarea', rows: 4 %>
+  </div>
+
+  
+
+  <div class="form-group text-center">
+    <%= f.submit '募集', class: 'btn btn-primary submit-button' %>
+  </div>
+<% end %>
+
+
+<style>
+    .btn {
+      margin: 10px 15px;
+      padding: 10px 15px;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+      border-radius: 4px;
+      background-color: #faa61a;
+      color: white;
+
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: row;
+      align-items:
+      margin-bottom: 15px;
+    }
+
+    .form-label {
+      display: block; /* ラベルをブロック要素にして改行させる */ /* ラベルを太字にする（オプション） */
+    }
+
+    .form-control {
+      display: block;
+      border: 1px solid #ccc; /* 薄いグレーのボーダー */
+      border-radius: 4px; /* 角を丸くする */
+      padding: 8px; /* 内側の余白を追加 */
+      width: 100%; /* 幅を100%にして親要素にフィットさせる */
+      box-sizing: border-box; /* ボーダーやパディングを含めた幅計算 */
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      flatpickr("#schedule", {
+      dateFormat: "Y-m-d", // 日付のフォーマットを設定
+    });
+  });
+  </script>

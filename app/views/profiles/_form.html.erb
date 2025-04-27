@@ -17,19 +17,19 @@
 
   <div class = 'form-group-profile'>
     <label for="name" class="form-label">チーム名</label>
-    <%= f.search_field :name, class: 'form-control', placeholder: t('サムライ'), style: "display: block" %>
+    <%= f.text_field :name, class: 'form-control', placeholder: t('サムライ'), style: "display: block" %>
 
     <label for = "location" class="form-label">所在地</label>
-    <%= f.search_field :location, class: 'form-control', placeholder: t('横浜'), style: "display: block" %>
+    <%= f.text_field :location, class: 'form-control', placeholder: t('横浜'), style: "display: block" %>
 
     <label for="genre_generation_name" class="form-label">年代</label>
     <%= f.text_field :genre_generation_name, class: 'form-control', placeholder: t('スポ少、小学生'), style: "display: block" %>
 
     <label for = "sports_tags_name" class="form-label">競技</label>
-    <%= f.search_field :sports_tags_name, class: 'form-control', placeholder: t('サッカー'), style: "display: block" %>
+    <%= f.text_field :sports_tags_name, class: 'form-control', placeholder: t('サッカー'), style: "display: block" %>
 
     <label for = "introduction" class="form-label">紹介文</label>
-    <%= f.search_field :introduction, class: 'form-control', placeholder: t('はじめまして...'), style: "display: block" %>
+    <%= f.text_area :introduction, class: 'form-control', placeholder: t('はじめまして...'), style: "display: block" %>
 
     <%= f.label :avatar %>
     <%= f.file_field :avatar, class: 'form-control mb-3', accept: 'image/*' %>
@@ -43,7 +43,7 @@
       <% end %>
     </div>
   </div>
- 
+
   <% if f.object.new_record? %>
     <%= f.submit '登録', class: 'btn btn-primary' %>
   <% else %>
