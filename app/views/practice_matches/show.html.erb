@@ -44,8 +44,11 @@
       </div>
     </div>
   </div>
+  <% unless current_user && @practice_match.user_id == current_user.id %>
+    <%= link_to "応募", practice_match_likes_path(practice_match_id: @practice_match.id), method: :post, class: 'btn btn-primary' %>
+  <% end %>
   <% if current_user && @practice_match.user_id == current_user.id %>
-    <%= link_to "編集", edit_practice_match_path(@practice_match), class: "btn" %> |
+    <%= button_to "編集", edit_practice_match_path(@practice_match), class: "btn" %> |
     <%= button_to "削除", @practice_match, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn" %>
   <% end %>
 </div>

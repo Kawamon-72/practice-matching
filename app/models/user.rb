@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :practice_matches
+  has_many :likes
+  has_many :practice_matches, through: :likes
   authenticates_with_sorcery!
 
   validates :password, presence: true, length: { minimum: 3 }, if: -> { new_record? || change[:crypted_password] }

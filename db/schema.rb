@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_24_111240) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_29_073005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,6 +24,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_24_111240) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "practice_match_id", null: false
+    t.integer "like_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["practice_match_id"], name: "index_likes_on_practice_match_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "practice_matches", force: :cascade do |t|
@@ -100,6 +110,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_24_111240) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "likes", "practice_matches"
+  add_foreign_key "likes", "users"
   add_foreign_key "practice_matches", "users"
   add_foreign_key "practice_matches_cities", "city_tags"
   add_foreign_key "practice_matches_cities", "practice_matches"

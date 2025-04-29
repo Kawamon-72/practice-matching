@@ -15,7 +15,7 @@
 
 <div id="practice_matches">
   <% @practice_matches.each do |practice_match| %>
-    <%= render practice_match %>
+    <%= render partial: "practice_match", locals: { practice_match: practice_match } %>
     
   <% end %>
 </div>

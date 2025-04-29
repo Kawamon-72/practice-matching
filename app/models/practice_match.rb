@@ -1,6 +1,8 @@
 class PracticeMatch < ApplicationRecord
   has_many :practice_matches_prefectures, dependent: :destroy
   has_many :prefecture_tags, through: :practice_matches_prefectures
+  has_many :likes
+  has_many :users, through: :likes
 
   has_many :practice_matches_cities, dependent: :destroy
   has_many :city_tags, through: :practice_matches_cities
