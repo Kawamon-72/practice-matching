@@ -1,5 +1,6 @@
 class PracticeMatchesController < ApplicationController
   before_action :set_practice_match, only: %i[ show edit update destroy ]
+  before_action :require_login, only: [:create, :update, :destroy]
   skip_before_action :require_login, only: %i[index]
   # GET /practice_matches or /practice_matches.json
   def index
