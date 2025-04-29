@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_29_073005) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_29_085954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -101,6 +101,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_29_073005) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_practice_matches", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "practice_match_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["practice_match_id"], name: "index_user_practice_matches_on_practice_match_id"
+    t.index ["user_id"], name: "index_user_practice_matches_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -121,4 +130,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_29_073005) do
   add_foreign_key "profile_genre_generations", "profiles"
   add_foreign_key "profile_sports", "profiles"
   add_foreign_key "profile_sports", "sports_tags"
+  add_foreign_key "user_practice_matches", "practice_matches"
+  add_foreign_key "user_practice_matches", "users"
 end
