@@ -1,4 +1,5 @@
-<%= form_with model: @practice_match, local: true, multipart: true, html: { class: 'practice-match-form' } do |f| %>
+<%= form_with model: @practice_match, url: practice_matches_path, data: { turbo: false } do |f| %>
+
   <% if @practice_match.errors.any? %>
     <div class="alert alert-danger">
       <h2><%= pluralize(@practice_match.errors.count, "件のエラー") %>があります：</h2>

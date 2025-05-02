@@ -71,6 +71,8 @@ Rails.application.configure do
   config.action_view.annotate_rendered_view_with_filenames = true
 
   # Uncomment if you wish to allow Action Cable access from any origin.
+  Rails.application.config.session_store :cookie_store, key: '_your_app_session', same_site: :lax
+
   # config.action_cable.disable_request_forgery_protection = true
 
   # Raise error when a before_action's only/except options reference missing actions.
