@@ -25,21 +25,25 @@ class PracticeMatchesController < ApplicationController
 
   # POST /practice_matches or /practice_matches.json
   def create
-    @practice_match = current_user.practice_matches.new(practice_match_params)
-
+    Rails.logger.debug "★★ current_user: #{current_user.inspect}"
+    @practice_match = current_user.own_practice_matches.new(practice_match_params)
+  
     if @practice_match.save
+      # prefecture_tag_name, city_tag_name は保存後に個別処理
       if params[:practice_match][:prefecture_tag_name].present?
-        tag = PrefectureTag.find_or_create_by(name: params[:practice_match][:prefecture_tag_name])
-        @practice_match.prefecture_tags << tag unless @practice_match.prefecture_tags.include?(tag)
+        prefecture_tag = PrefectureTag.find_or_create_by(name: params[:practice_match][:prefecture_tag_name])
+        @practice_match.prefecture_tags << prefecture_tag unless @practice_match.prefecture_tags.include?(prefecture_tag)
       end
-    
+  
       if params[:practice_match][:city_tag_name].present?
-        tag = CityTag.find_or_create_by(name: params[:practice_match][:city_tag_name])
-        @practice_match.city_tags << tag unless @practice_match.city_tags.include?(tag)
+        city_tag = CityTag.find_or_create_by(name: params[:practice_match][:city_tag_name])
+        @practice_match.city_tags << city_tag unless @practice_match.city_tags.include?(city_tag)
       end
-      redirect_to root_path, notice: "練習試合の募集をしました。" 
+
+      redirect_to root_path, notice: '募集が作成されました。'
     else
-      render :new, status: :unprocessable_entity 
+      Rails.logger.debug "==== PracticeMatch save errors: #{@practice_match.errors.full_messages} ===="
+      render :new
     end
   end
 
@@ -79,6 +83,6 @@ class PracticeMatchesController < ApplicationController
 
     # Only allow a list of trusted parameters through.コメント ストパラフォームのやつも作成？
     def practice_match_params
-      params.require(:practice_match).permit(:schedule, :place, :number_of_accept, :remarks, :created_at, :updated_at, :sports, genre_generation: [])
+      params.require(:practice_match).permit(:schedule, :place, :remarks, :prefecture_tag_name, :city_tag_name)
     end
 end

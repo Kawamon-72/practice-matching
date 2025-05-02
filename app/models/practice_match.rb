@@ -9,6 +9,9 @@ class PracticeMatch < ApplicationRecord
   has_many :practice_matches_cities, dependent: :destroy
   has_many :city_tags, through: :practice_matches_cities
   belongs_to :user
+  validates :user, presence: true
+
+  attr_accessor :prefecture_tag_name, :city_tag_name
   def self.ransackable_attributes(auth_object = nil)
     ["place", "schedule", "prefecture", "city", "sports", "genre_generation"]
   end
