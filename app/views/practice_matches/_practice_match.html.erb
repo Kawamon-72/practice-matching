@@ -10,23 +10,22 @@
   <p><strong>Place:</strong> <%= practice_match.place %></p>
 
   <div class="button-row mt-3">
-    <div class="button-col">
-      <%= form_with url: practice_match_likes_path(practice_match_id: practice_match.id), method: :post, local: true do %>
-        <%= submit_tag "応募", class: "btn btn-primary w-100" %>
-        <%= link_to "詳細", practice_match_path(practice_match), class: "btn btn-outline-secondary w-100" %>
-      <% end %>
-    </div>
+    <%= form_with url: practice_match_likes_path(practice_match_id: practice_match.id), method: :post, local: true do %>
+      <%= submit_tag "応  募", class: "btn btn-primary btn-sm btn-compact me-2" %>
+    <% end %>
+    <%= link_to "詳  細", practice_match_path(practice_match), class: "btn btn-outline-secondary btn-sm btn-compact" %>
   </div>
-
 
   <style>
     .button-row {
-     display: flex;
-      gap: 0.5rem;
+      display: flex;
+      align-items: center;
     }
 
-    .button-col {
-      flex: 1;
+    .btn-compact {
+      min-width: 80px;
+      padding: 4px 10px;
+      font-size: 0.85rem;
     }
 
     .practice-match-card {
