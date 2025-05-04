@@ -1,12 +1,31 @@
-<% content_for :title, "Editing profile" %>
+<%= render 'layouts/header' %>
 
-<h1>プロフィール編集画面</h1>
+<% content_for :title, "Editing profile" %>
+<div class="container-profile">
+  <div class="h1">
+    <h1>プロフィール編集画面</h1>
+  </div>
+
 
 <%= render "form", profile: @profile %>
 
 <br>
 
-<div>
-  <%= link_to "Show this profile", @profile %> |
-  <%= link_to "Back to profiles", profile_path %>
+<div class="pro-show">
+  <%= link_to "プロフィール詳細へ", @profile %> 
 </div>
+
+<%= render 'layouts/footer' %>
+
+<style>
+    .h1 {
+      text-align: center;
+      color: black;
+      padding: 10px 10px;
+    }
+
+    .pro-show {
+      text-align: center;
+      color: black;
+    }
+</style>

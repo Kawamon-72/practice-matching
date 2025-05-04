@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :practice_matches, only: [:index, :show, :new, :edit, :create, :update, :destroy] do
     resources :likes, only: %i[create]
   end
-
+  resources :notifications, only: [:index]
   resources :room, only: [:show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

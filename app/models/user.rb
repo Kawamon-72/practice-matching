@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :liked_practice_matches, through: :likes, source: :practice_match
   has_many :user_practice_matches
   has_many :joined_practice_matches, through: :user_practice_matches, source: :practice_match
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  has_many :notification_practice_matches, through: :notifications, source: :practice_match
 
   authenticates_with_sorcery!
 

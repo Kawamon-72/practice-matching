@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_01_134345) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_04_003635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -36,6 +36,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_134345) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "visitor_id", null: false
+    t.bigint "visited_id", null: false
+    t.bigint "practice_match_id", null: false
+    t.string "action"
+    t.boolean "checked"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["practice_match_id"], name: "index_notifications_on_practice_match_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
+  end
+
   create_table "practice_matches", force: :cascade do |t|
     t.date "schedule"
     t.text "place"
@@ -47,20 +60,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_134345) do
   end
 
   create_table "practice_matches_cities", force: :cascade do |t|
-    t.bigint "practice_matche_id", null: false
+    t.bigint "practice_match_id", null: false
     t.bigint "city_tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_tag_id"], name: "index_practice_matches_cities_on_city_tag_id"
-    t.index ["practice_matche_id"], name: "index_practice_matches_cities_on_practice_matche_id"
+    t.index ["practice_match_id"], name: "index_practice_matches_cities_on_practice_match_id"
   end
 
   create_table "practice_matches_prefectures", force: :cascade do |t|
-    t.bigint "practice_matche_id", null: false
+    t.bigint "practice_match_id", null: false
     t.bigint "prefecture_tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["practice_matche_id"], name: "index_practice_matches_prefectures_on_practice_matche_id"
+    t.index ["practice_match_id"], name: "index_practice_matches_prefectures_on_practice_match_id"
     t.index ["prefecture_tag_id"], name: "index_practice_matches_prefectures_on_prefecture_tag_id"
   end
 
@@ -120,10 +133,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_134345) do
 
   add_foreign_key "likes", "practice_matches"
   add_foreign_key "likes", "users"
+  add_foreign_key "notifications", "practice_matches"
+  add_foreign_key "notifications", "users", column: "visited_id"
+  add_foreign_key "notifications", "users", column: "visitor_id"
   add_foreign_key "practice_matches", "users"
   add_foreign_key "practice_matches_cities", "city_tags"
-  add_foreign_key "practice_matches_cities", "practice_matches", column: "practice_matche_id"
-  add_foreign_key "practice_matches_prefectures", "practice_matches", column: "practice_matche_id"
+  add_foreign_key "practice_matches_cities", "practice_matches"
+  add_foreign_key "practice_matches_prefectures", "practice_matches"
   add_foreign_key "practice_matches_prefectures", "prefecture_tags"
   add_foreign_key "profile_genre_generations", "genre_generation_tags"
   add_foreign_key "profile_genre_generations", "profiles"

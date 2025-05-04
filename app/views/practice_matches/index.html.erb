@@ -21,10 +21,15 @@
 </div>
 
 <% if !logged_in? %>
- <p>ログイン・新規登録をして始めましょう！</p>
- <%= link_to "ログイン", login_path , class: 'btn' %>
- <%= link_to "新規登録", new_user_path , class: 'btn' %>
+  <div class="login-prompt">
+    <p>ログイン・新規登録をして始めましょう！</p>
+    <div class="login-buttons">
+      <%= link_to "ログイン", login_path, class: 'btn btn-login' %>
+      <%= link_to "新規登録", new_user_path, class: 'btn btn-signup' %>
+    </div>
+  </div>
 <% end %>
+
 
 <%= render 'layouts/footer' %>
 
@@ -36,5 +41,56 @@
       border-radius: 4px;
       background-color: #faa61a;
       color: white;
+    }
+
+    .login-prompt {
+      text-align: center;
+      background-color: #f8f9fa;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem auto;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .login-prompt p {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .login-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .btn-login, .btn-signup {
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      min-width: 120px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .btn-login {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+    }
+
+    .btn-login:hover {
+      background-color: #0b5ed7;
+    }
+
+    .btn-signup {
+      background-color: white;
+      color: #0d6efd;
+      border: 2px solid #0d6efd;
+    }
+
+    .btn-signup:hover {
+      background-color: #e9f1ff;
     }
 </style>

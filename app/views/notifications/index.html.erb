@@ -1,0 +1,25 @@
+<%= render 'layouts/header' %>
+<h2>通知一覧</h2>
+
+<% @notifications.each do |notification| %>
+  <div class="<%= 'unread' unless notification.checked %>">
+    <% if notification.visitor_id == current_user.id %>
+      あなたが <%= link_to notification.practice_match.user.profile.name, profile_path(notification.practice_match.user.profile) %> さんの
+      <%= link_to '募集', practice_match_path(notification.practice_match) %> に応募しました。
+    <% else %>
+      <% if notification.visitor.profile.present? %>
+        <%= link_to notification.visitor.profile.name, profile_path(notification.visitor.profile) %> さんが
+      <% else %>
+        名前未設定のユーザーさんが
+      <% end %>
+      <%= link_to 'あなたの募集', practice_match_path(notification.practice_match) %> に応募しました。
+    <% end %>
+
+    <%= time_ago_in_words(notification.created_at) %>前
+
+    <br>
+    <%= link_to "💬 連絡をとりましょう", "dm_room_path(notification.practice_match_id)", class: "btn btn-outline-primary mt-1" %>
+  </div>
+<% end %>
+
+<%= render 'layouts/footer' %>

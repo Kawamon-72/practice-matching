@@ -1,7 +1,7 @@
-<%= form_with model: @practice_match, url: practice_matches_path, data: { turbo: false } do |f| %>
+<%= form_with model: @practice_match, url: practice_matches_path, data: { turbo: false }, html: { class: "match-form" } do |f| %>
 
   <% if @practice_match.errors.any? %>
-    <div class="alert alert-danger">
+    <div class="form-errors">
       <h2><%= pluralize(@practice_match.errors.count, "件のエラー") %>があります：</h2>
       <ul>
         <% @practice_match.errors.full_messages.each do |message| %>
@@ -11,75 +11,109 @@
     </div>
   <% end %>
 
-  <div class="form-group mb-3">
+  <div class="form-group">
     <%= f.label :schedule, "日にち", class: 'form-label' %>
-    <%= f.date_field :schedule, class: 'form-control match-date' %>
+    <%= f.date_field :schedule, class: 'form-control' %>
   </div>
 
-  <div class="form-group mb-3">
+  <div class="form-group">
     <%= f.label :place, "場所（会場名など）", class: 'form-label' %>
-    <%= f.text_field :place, class: 'form-control match-location' %>
+    <%= f.text_field :place, class: 'form-control' %>
   </div>
 
-  <div class="form-group mb-3">
+  <div class="form-group">
     <%= f.label :prefecture_tag_name, "都道府県", class: 'form-label' %>
-    <%= f.text_field :prefecture_tag_name, class: 'form-control prefecture-tag' %>
+    <%= f.text_field :prefecture_tag_name, class: 'form-control' %>
   </div>
 
-  <div class="form-group mb-3">
+  <div class="form-group">
     <%= f.label :city_tag_name, "市区町村", class: 'form-label' %>
-    <%= f.text_field :city_tag_name, class: 'form-control city-tag' %>
+    <%= f.text_field :city_tag_name, class: 'form-control' %>
   </div>
 
-  <div class="form-group mb-3">
+  <div class="form-group">
     <%= f.label :remarks, "備考", class: 'form-label' %>
-    <%= f.text_area :remarks, class: 'form-control note-textarea', rows: 4 %>
+    <%= f.text_area :remarks, class: 'form-control', rows: 4 %>
   </div>
 
-  
-
-  <div class="form-group text-center">
-    <%= f.submit '募集', class: 'btn btn-primary submit-button' %>
+  <div class="form-submit text-center">
+    <%= f.submit '募集', class: 'btn-submit' %>
   </div>
 <% end %>
 
-
 <style>
-    .btn {
-      margin: 10px 15px;
-      padding: 10px 15px;
-      border: 1px solid #ccc; /* 薄いグレーのボーダー */
-      border-radius: 4px;
-      background-color: #faa61a;
-      color: white;
+  .match-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
 
+  .form-errors {
+    background-color: #ffe5e5;
+    border: 1px solid #ff9f9f;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-errors h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #c00;
+  }
+
+  .form-errors ul {
+    padding-left: 1.2rem;
+    margin: 0;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+
+  .form-control:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.1);
+  }
+
+  .btn-submit {
+    background-color: #0d6efd;
+    color: white;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .btn-submit:hover {
+    background-color: #0b5ed7;
+  }
+
+  @media (max-width: 600px) {
+    .match-form {
+      padding: 1rem;
     }
-
-    .form-group {
-      display: flex;
-      flex-direction: row;
-      align-items:
-      margin-bottom: 15px;
-    }
-
-    .form-label {
-      display: block; /* ラベルをブロック要素にして改行させる */ /* ラベルを太字にする（オプション） */
-    }
-
-    .form-control {
-      display: block;
-      border: 1px solid #ccc; /* 薄いグレーのボーダー */
-      border-radius: 4px; /* 角を丸くする */
-      padding: 8px; /* 内側の余白を追加 */
-      width: 100%; /* 幅を100%にして親要素にフィットさせる */
-      box-sizing: border-box; /* ボーダーやパディングを含めた幅計算 */
-    }
-  </style>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      flatpickr("#schedule", {
-      dateFormat: "Y-m-d", // 日付のフォーマットを設定
-    });
-  });
-  </script>
+  }
+</style>

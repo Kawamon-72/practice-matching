@@ -2,14 +2,31 @@
 
 <% content_for :title, "練習試合募集作成画面" %>
 
-<h1>New practice match</h1>
+<div class="container-practice">
+  <div class="h1">
+    <h1>練習試合募集作成画面</h1>
+  </div>
 
-<%= render "form_match", practice_match: @practice_match %>
+  <%= render "form_match", practice_match: @practice_match %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Back to practice matches", root_path %>
+  <div class="link">
+    <%= link_to "ホーム", root_path %>
+  </div>
 </div>
 
 <%= render 'layouts/footer' %>
+
+<style>
+    .h1 {
+      text-align: center;
+      color: black;
+      padding: 10px 0;
+    }
+
+    .link {
+      text-align: center;
+      color: black;
+    }
+</style>

@@ -1,36 +1,49 @@
-<div id="<%= dom_id practice_match %>">
-  <p>
-    <strong>チーム名:</strong>
-    <% if practice_match.user && practice_match.user.profile && practice_match.user.profile.name.present? %>
-      <%= practice_match.user.profile.name %>
-    <% else %>
-      未設定
-    <% end %>
-  </p>
-
-  <p>
-    <strong>Sports:</strong>
-    <% if practice_match.user && practice_match.user.profile && practice_match.user.profile.sports_tags.present? %>
+<div id="<%= dom_id practice_match %>" class="practice-match-card card mb-4 p-3">
+  <p><strong>チーム名:</strong> <%= practice_match.user&.profile&.name.presence || '未設定' %></p>
+  <p><strong>Sports:</strong>
+    <% if practice_match.user&.profile&.sports_tags.present? %>
       <%= practice_match.user.profile.sports_tags.map(&:name).join(", ") %>
-    <% else %>
-      未設定
+    <% else %>未設定
     <% end %>
   </p>
+  <p><strong>Schedule:</strong> <%= practice_match.schedule %></p>
+  <p><strong>Place:</strong> <%= practice_match.place %></p>
 
-  </p>
+  <div class="button-row mt-3">
+    <div class="button-col">
+      <%= form_with url: practice_match_likes_path(practice_match_id: practice_match.id), method: :post, local: true do %>
+        <%= submit_tag "応募", class: "btn btn-primary w-100" %>
+        <%= link_to "詳細", practice_match_path(practice_match), class: "btn btn-outline-secondary w-100" %>
+      <% end %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Schedule:</strong>
-    <%= practice_match.schedule %>
-  </p>
 
-  <p>
-    <strong>Place:</strong>
-    <%= practice_match.place %>
-  </p>
+  <style>
+    .button-row {
+     display: flex;
+      gap: 0.5rem;
+    }
 
-  <p>
-      <%= button_to "応募", practice_match_likes_path(practice_match_id: practice_match.id), method: :post, class: 'btn btn-primary' %>
-      <%= link_to "詳細", practice_match_path(practice_match), class: 'btn' %>
-  </p>
+    .button-col {
+      flex: 1;
+    }
+
+    .practice-match-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1rem;
+    }
+
+    .practice-match-card p {
+      margin-bottom: 0.5rem;
+    }
+
+    .practice-match-card strong {
+      color: #333;
+    }
+  </style>
 </div>
