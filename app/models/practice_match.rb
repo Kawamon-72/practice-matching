@@ -5,9 +5,10 @@ class PracticeMatch < ApplicationRecord
   has_many :users, through: :likes
   has_many :user_practice_matches
   has_many :users, through: :user_practice_matches
-
   has_many :practice_matches_cities, dependent: :destroy
   has_many :city_tags, through: :practice_matches_cities
+  has_many :notification_users, through: :notifications, source: :user
+  has_many :notifications, dependent: :destroy
   belongs_to :user
   validates :user, presence: true
 

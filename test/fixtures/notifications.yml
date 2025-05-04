@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visitor: one
+  visited: one
+  practice_match: one
+  action: MyString
+  checked: false
+
+two:
+  visitor: two
+  visited: two
+  practice_match: two
+  action: MyString
+  checked: false

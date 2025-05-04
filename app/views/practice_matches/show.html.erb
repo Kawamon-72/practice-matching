@@ -1,59 +1,65 @@
+<%= render 'layouts/header' %>
+
 <div class="practice-match-details container my-4">
-  <h2 class="mb-4 text-center">練習試合の詳細</h2>
+  <h2 class="mb-4 text-center text-primary">練習試合の詳細</h2>
 
-  <div class="card p-4 shadow-sm">
-    <div class="mb-3">
-      <strong>チーム名：</strong>
-      <%= @practice_match.user&.profile&.name || "未設定" %>
-    </div>
-
-    <div class="mb-3">
-      <strong>ジャンル（年代）：</strong>
-      <%= @practice_match.user&.profile&.genre_generation_tags&.map(&:name)&.join(', ') || "未設定" %>
-    </div>
-
-    <div class="mb-3">
-      <strong>競技：</strong>
-      <%= @practice_match.user&.profile&.sports_tags&.map(&:name)&.join(', ') || "未設定" %>
-    </div>
-
-    <div class="mb-3">
-      <strong>日にち：</strong>
-      <%= @practice_match.schedule.strftime('%Y年%m月%d日') if @practice_match.schedule.present? %>
-    </div>
+  <div class="card p-4 shadow-sm border-0 rounded-3">
+    <%=
+      {
+        "チーム名" => @practice_match.user&.profile&.name || "未設定",
+        "ジャンル（年代）" => @practice_match.user&.profile&.genre_generation_tags&.map(&:name)&.join(', ') || "未設定",
+        "競技" => @practice_match.user&.profile&.sports_tags&.map(&:name)&.join(', ') || "未設定",
+        "日にち" => (@practice_match.schedule&.strftime('%Y年%m月%d日') || "未設定"),
+        "場所" => @practice_match.place,
+        "都道府県" => @practice_match.prefecture_tags.map(&:name).join(', ') || "未設定",
+        "市区町村" => @practice_match.city_tags.map(&:name).join(', ') || "未設定"
+      }.map do |label, value|
+        content_tag(:div, class: "row mb-2") do
+          concat content_tag(:div, "#{label}：", class: "col-sm-3 fw-bold text-secondary")
+          concat content_tag(:div, value, class: "col-sm-9")
+        end
+      end.join.html_safe
+    %>
 
     <div class="mb-3">
-      <strong>場所：</strong>
-      <%= @practice_match.place %>
-    </div>
-
-    <div class="mb-3">
-      <strong>都道府県：</strong>
-      <%= @practice_match.prefecture_tags.map(&:name)&.join(', ') || "未設定" %>
-    </div>
-
-    <div class="mb-3">
-      <strong>市区町村：</strong>
-      <%= @practice_match.city_tags.map(&:name)&.join(', ') || "未設定" %>
-    </div>
-
-    <div class="mb-3">
-      <strong>備考：</strong>
-      <div class="border rounded p-2 bg-light">
+      <strong class="text-secondary">備考：</strong>
+      <div class="border rounded p-3 bg-light">
         <%= simple_format(@practice_match.remarks.presence || "備考はありません。") %>
       </div>
     </div>
   </div>
-  <% unless current_user && @practice_match.user_id == current_user.id %>
-    <%= link_to "応募", practice_match_likes_path(practice_match_id: @practice_match.id), method: :post, class: 'btn btn-primary' %>
-  <% end %>
-  <% if current_user && @practice_match.user_id == current_user.id %>
-    <%= button_to "編集", edit_practice_match_path(@practice_match), class: "btn" %> |
-    <%= button_to "削除", @practice_match, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn" %>
-  <% end %>
+
+  <div class="text-center my-4">
+    <% if current_user && @practice_match.user_id == current_user.id %>
+      <%= button_to "編集", edit_practice_match_path(@practice_match), class: "btn btn-outline-primary me-2" %>
+      <%= button_to "削除", @practice_match, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
+    <% else %>
+      <%= button_to "応募", practice_match_likes_path(practice_match_id: @practice_match.id), method: :post, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-3">
+    <%= link_to "Back to practice matches", practice_matches_path, class: "btn btn-secondary" %>
+  </div>
 </div>
 
+<%= render 'layouts/footer' %>
 
-<div> 
-  <%= link_to "Back to practice matches", practice_matches_path %>
-</div>
+<style>
+  .card {
+    background-color: #fff;
+  }
+
+  .fw-bold {
+    font-weight: bold;
+  }
+
+  .text-secondary {
+    color: #6c757d;
+  }
+
+  .btn {
+    min-width: 120px;
+  }
+</style>
+

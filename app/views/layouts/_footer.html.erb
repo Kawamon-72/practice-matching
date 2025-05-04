@@ -1,25 +1,87 @@
-<footer id='footer' class='footer-bottom'>
-  <div class='container'>
-    <div class='row'>
-      <div class='col-sm-6 col-12'>
+<footer id="footer" class="footer-bottom">
+  <div class="container-footer">
+    <div class="row d-flex justify-content-center text-center">
+      <div class="col-12 col-md-8 mx-auto">
         <% if !logged_in? %>
-          <h1>Practice Matching!@2025</h1>
+          <h5 class="footer-title">Practice Matching! © 2025</h5>
         <% else %>
-          <%= link_to '<i class="fas fa-home"></i>'.html_safe, '#', class: "icon-link" %>
+          <div class="footer-icons">
+            <%= link_to root_path, class: "icon-link" do %>
+              <i class="fas fa-home"></i>
+            <% end %>
 
-          <%= link_to '募集', new_practice_match_path, class: "button icon-link" %>
+            <%= link_to new_practice_match_path, class: "icon-link text-label" do %>
+              募集
+            <% end %>
 
-          <%= link_to '<i class="fas fa-bell"></i>'.html_safe, '#', class: "icon-link" %>
-    
-          <%= link_to '<i class="fas fa-comments"></i>'.html_safe, '#', class: "icon-link" %>
+            <%= link_to notifications_path, class: "icon-link" do %>
+              <i class="fas fa-bell"></i>
+            <% end %>
 
-          <% if current_user&.profile.present? %>
-            <%= link_to '<i class="fas fa-user"></i>'.html_safe, profile_path, class: "icon-link" %>
-          <% else %>
-            <%= link_to '<i class="fas fa-user"></i>'.html_safe, new_profile_path, class: "icon-link" %>
-          <% end %>
+            <%= link_to '#', class: "icon-link" do %>
+              <i class="fas fa-comments"></i>
+            <% end %>
+
+            <% if current_user&.profile.present? %>
+              <%= link_to profile_path, class: "icon-link" do %>
+                <i class="fas fa-user"></i>
+              <% end %>
+            <% else %>
+              <%= link_to new_profile_path, class: "icon-link" do %>
+                <i class="fas fa-user"></i>
+              <% end %>
+            <% end %>
+          </div>
         <% end %>
       </div>
-    </div> 
+    </div>
   </div>
-</div>
+
+  <style>
+    .footer-bottom {
+      background-color: #faa61a;
+      padding: 20px 0;
+      border-top: 1px solid #dee2e6;
+    }
+
+    .footer-title {
+      color: #6c757d;
+      margin-bottom: 0;
+    }
+
+    .footer-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .icon-link {
+      font-size: 1.5rem;
+      color: #343a40;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .icon-link:hover {
+      color: #007bff;
+    }
+
+    .text-label {
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0 5px;
+    }
+
+    @media (max-width: 576px) {
+      .footer-icons {
+        gap: 15px;
+      }
+
+      .icon-link {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</footer>
