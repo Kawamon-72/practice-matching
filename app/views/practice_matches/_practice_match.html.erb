@@ -13,16 +13,16 @@
     <div class="button-row mt-3">
       <div class="button-col">
         <%= form_with url: practice_match_likes_path(practice_match_id: practice_match.id), method: :post, local: true do %>
-          <%= submit_tag "応募", class: "btn btn-primary w-10" %>
-          <%= link_to "詳細", practice_match_path(practice_match), class: "btn btn-primary w-10" %>
+          <%= submit_tag "応募", class: "btn btn-primary w-20" %>
+          <%= link_to "詳細", practice_match_path(practice_match), class: "btn btn-primary w-20" %>
         <% end %>
       </div>
     </div>
   <% else %>
     <div class="button-row mt-2 d-flex justify-content-start gap-2">
-      <%= link_to "編集", edit_practice_match_path(practice_match), class: "btn btn-outline-primary me-2" %>
-      <%= link_to "詳細", practice_match_path(practice_match), class: "btn btn-primary w-10" %>
-      <%= button_to "削除", practice_match, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
+      <%= link_to "編集", edit_practice_match_path(practice_match), class: "btn btn-outline-primary me-2 w-20" %>
+      <%= link_to "詳細", practice_match_path(practice_match), class: "btn btn-primary w-20" %>
+      <%= button_to "削除", practice_match, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger w-20" %>
     </div>
   <% end %>
 
