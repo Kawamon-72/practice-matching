@@ -10,4 +10,12 @@ class Profile < ApplicationRecord
   validates :name, presence: true, if: -> { new_record? || changes[:name].present? }
   validates :location, presence: true, if: -> { new_record? || changes[:location].present? }
   validates :introduction, presence: true, if: -> { new_record? || changes[:introduction].present? }
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["id", "user_id"] # 基本属性を追加（必要に応じて拡張）
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["genre_generation_tags"]
+  end
 end

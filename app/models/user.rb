@@ -15,4 +15,12 @@ class User < ApplicationRecord
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validates :email, presence: true, uniqueness: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["id", "email", "created_at", "updated_at"] # 必要なものだけ許可。crypted_passwordなどは含めない
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["profile"]
+  end
 end
