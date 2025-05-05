@@ -31,15 +31,15 @@
 
   <div class="text-center my-4">
     <% if current_user && @practice_match.user_id == current_user.id %>
-      <%= button_to "編集", edit_practice_match_path(@practice_match), class: "btn btn-outline-primary me-2" %>
-      <%= button_to "削除", @practice_match, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
+      <%= button_to "編集", edit_practice_match_path(@practice_match), class: "btn btn-outline-primary me-2", form: { style: "display: inline" } %>
+      <%= button_to "削除", @practice_match, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger", form: { style: "display: inline" } %>
     <% else %>
       <%= button_to "応募", practice_match_likes_path(practice_match_id: @practice_match.id), method: :post, class: 'btn btn-primary' %>
     <% end %>
   </div>
 
   <div class="text-center mt-3">
-    <%= link_to "Back to practice matches", practice_matches_path, class: "btn btn-secondary" %>
+    <%= link_to "練習試合一覧", practice_matches_path, class: "btn btn-secondary" %>
   </div>
 </div>
 
