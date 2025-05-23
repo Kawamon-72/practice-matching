@@ -1,0 +1,9 @@
+<h2>チャットルーム</h2>
+
+<div id="messages">
+  <%= render @chat_room.chat_messages %>
+</div>
+
+<div id="chat_form">
+  <%= render "chat_messages/form", chat_message: @chat_message %>
+</div>

@@ -1,0 +1,34 @@
+<%= render 'layouts/header' %>
+<h2>マッチングしたチャット一覧</h2>
+
+<% @chat_rooms.each do |chat_room| %>
+  <div class="chat-room-link">
+    <% matched_user = chat_room.practice_match.user %>
+    <% matched_user_name = matched_user.profile&.name || "名無しユーザー" %>
+
+    <%= link_to matched_user_name, chat_room_path(chat_room), class: "chat-link" %>
+
+    <div>
+      （日時: <%= chat_room.practice_match.schedule.strftime("%Y/%m/%d") %> /
+      場所: <%= chat_room.practice_match.place %>）
+    </div>
+  </div>
+<% end %>
+
+<%= render 'layouts/footer' %>
+
+
+<style>
+  .chat-room-link {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+  }
+
+  .chat-link {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+  }
+</style>

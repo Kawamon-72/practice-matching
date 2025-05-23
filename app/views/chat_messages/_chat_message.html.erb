@@ -1,0 +1,39 @@
+<% is_own_message = current_user && chat_message.user_id == current_user.id %>
+<div class="chat-message <%= is_own_message ? 'own-message' : 'other-message' %>">
+  <div class="message-meta">
+    <strong><%= chat_message.user.profile&.name || "名無し" %></strong>
+    <span class="timestamp"><%= chat_message.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+  </div>
+  <div class="message-content">
+    <%= chat_message.content %>
+  </div>
+</div>
+
+
+<style>
+ .chat-message {
+    max-width: 30%;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 10px;
+    clear: both;
+  }
+  
+  .own-message {
+    background-color: #dcf8c6; /* LINEの自分側っぽい色 */
+    margin-left: auto;
+    text-align: left;
+  }
+  
+  .other-message {
+    background-color: #fff200;
+    margin-right: auto;
+    text-align: left;
+  }
+  
+  .message-meta {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 4px;
+  }
+</style>

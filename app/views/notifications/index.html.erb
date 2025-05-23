@@ -18,7 +18,11 @@
     <%= time_ago_in_words(notification.created_at) %>前
 
     <br>
-    <%= link_to "💬 連絡をとりましょう", "dm_room_path(notification.practice_match_id)", class: "btn btn-outline-primary mt-1" %>
+    <%= form_with url: find_or_create_chat_rooms_path, method: :post, local: true, class: "d-inline" do %>
+      <%= hidden_field_tag :practice_match_id, notification.practice_match.id %>
+      <%= submit_tag "💬 連絡をとりましょう", class: "btn btn-outline-primary mt-1" %>
+    <% end %>
+
   </div>
 <% end %>
 

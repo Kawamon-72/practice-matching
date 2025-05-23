@@ -3,7 +3,10 @@ Rails.application.routes.draw do
     resources :likes, only: %i[create]
   end
   resources :notifications, only: [:index]
-  resources :room, only: [:show]
+  resources :chat_rooms do
+    resources :chat_messages, only: [:index, :create, :edit, :destroy]
+  end
+  post 'chat_rooms/find_or_create', to: 'chat_rooms#find_or_create', as: :find_or_create_chat_rooms
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -13,6 +16,9 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+
+  
+
 
   # Defines the root path route ("/")
   root "practice_matches#index"
