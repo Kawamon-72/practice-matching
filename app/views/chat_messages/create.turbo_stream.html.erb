@@ -1,0 +1,1 @@
+<%= turbo_stream.append "messages", partial: "chat_messages/chat_message", locals: { chat_message: @chat_message, current_user_id: current_user.id } %>

@@ -10,9 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_04_003635) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_17_072513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "chat_messages", force: :cascade do |t|
+    t.bigint "chat_room_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_room_id"], name: "index_chat_messages_on_chat_room_id"
+    t.index ["user_id"], name: "index_chat_messages_on_user_id"
+  end
+
+  create_table "chat_room_users", force: :cascade do |t|
+    t.bigint "chat_room_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_room_id"], name: "index_chat_room_users_on_chat_room_id"
+    t.index ["user_id"], name: "index_chat_room_users_on_user_id"
+  end
+
+  create_table "chat_rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "practice_match_id", null: false
+    t.index ["practice_match_id"], name: "index_chat_rooms_on_practice_match_id"
+  end
 
   create_table "city_tags", force: :cascade do |t|
     t.string "name"
@@ -32,6 +58,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_04_003635) do
     t.integer "like_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "liked_user_id"
+    t.index ["liked_user_id"], name: "index_likes_on_liked_user_id"
     t.index ["practice_match_id"], name: "index_likes_on_practice_match_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
@@ -131,8 +159,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_04_003635) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "chat_messages", "chat_rooms"
+  add_foreign_key "chat_messages", "users"
+  add_foreign_key "chat_room_users", "chat_rooms"
+  add_foreign_key "chat_room_users", "users"
+  add_foreign_key "chat_rooms", "practice_matches"
   add_foreign_key "likes", "practice_matches"
   add_foreign_key "likes", "users"
+  add_foreign_key "likes", "users", column: "liked_user_id"
   add_foreign_key "notifications", "practice_matches"
   add_foreign_key "notifications", "users", column: "visited_id"
   add_foreign_key "notifications", "users", column: "visitor_id"

@@ -1,6 +1,7 @@
 class PracticeMatch < ApplicationRecord
   belongs_to :user
   has_one :profile, through: :user
+  has_one :chat_room
   has_many :practice_matches_prefectures, dependent: :destroy
   has_many :prefecture_tags, through: :practice_matches_prefectures
   has_many :likes

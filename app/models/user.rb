@@ -8,6 +8,13 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
   has_many :notification_practice_matches, through: :notifications, source: :practice_match
+  has_many :likes, foreign_key: :user_id
+  has_many :liked_users, through: :likes, source: :liked_user
+  has_many :reverse_likes, class_name: 'Like', foreign_key: :liked_user_id
+  has_many :liking_users, through: :reverse_likes, source: :user
+  has_many :chat_room_users
+  has_many :chat_rooms, through: :chat_room_users
+  has_many :chat_messages
 
   authenticates_with_sorcery!
 
