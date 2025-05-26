@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_24_041748) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_25_134736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,19 +24,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_24_041748) do
     t.index ["user_id"], name: "index_chat_messages_on_user_id"
   end
 
-  create_table "chat_room_users", force: :cascade do |t|
-    t.bigint "chat_room_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_room_id"], name: "index_chat_room_users_on_chat_room_id"
-    t.index ["user_id"], name: "index_chat_room_users_on_user_id"
-  end
-
   create_table "chat_rooms", force: :cascade do |t|
+    t.bigint "practice_match_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "practice_match_id", null: false
     t.index ["practice_match_id"], name: "index_chat_rooms_on_practice_match_id"
   end
 
@@ -88,20 +79,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_24_041748) do
   end
 
   create_table "practice_matches_cities", force: :cascade do |t|
-    t.bigint "practice_match_id", null: false
+    t.bigint "practice_matche_id", null: false
     t.bigint "city_tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_tag_id"], name: "index_practice_matches_cities_on_city_tag_id"
-    t.index ["practice_match_id"], name: "index_practice_matches_cities_on_practice_match_id"
+    t.index ["practice_matche_id"], name: "index_practice_matches_cities_on_practice_matche_id"
   end
 
   create_table "practice_matches_prefectures", force: :cascade do |t|
-    t.bigint "practice_match_id", null: false
+    t.bigint "practice_matche_id", null: false
     t.bigint "prefecture_tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["practice_match_id"], name: "index_practice_matches_prefectures_on_practice_match_id"
+    t.index ["practice_matche_id"], name: "index_practice_matches_prefectures_on_practice_matche_id"
     t.index ["prefecture_tag_id"], name: "index_practice_matches_prefectures_on_prefecture_tag_id"
   end
 
@@ -161,8 +152,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_24_041748) do
 
   add_foreign_key "chat_messages", "chat_rooms"
   add_foreign_key "chat_messages", "users"
-  add_foreign_key "chat_room_users", "chat_rooms"
-  add_foreign_key "chat_room_users", "users"
   add_foreign_key "chat_rooms", "practice_matches"
   add_foreign_key "likes", "practice_matches"
   add_foreign_key "likes", "users"
@@ -172,8 +161,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_24_041748) do
   add_foreign_key "notifications", "users", column: "visitor_id"
   add_foreign_key "practice_matches", "users"
   add_foreign_key "practice_matches_cities", "city_tags"
-  add_foreign_key "practice_matches_cities", "practice_matches"
-  add_foreign_key "practice_matches_prefectures", "practice_matches"
+  add_foreign_key "practice_matches_cities", "practice_matches", column: "practice_matche_id"
+  add_foreign_key "practice_matches_prefectures", "practice_matches", column: "practice_matche_id"
   add_foreign_key "practice_matches_prefectures", "prefecture_tags"
   add_foreign_key "profile_genre_generations", "genre_generation_tags"
   add_foreign_key "profile_genre_generations", "profiles"
