@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :password_resets, only: [:new, :create, :edit, :update]
   resources :practice_matches, only: [:index, :show, :new, :edit, :create, :update, :destroy] do
     resources :likes, only: %i[create]
   end
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   
 
 
