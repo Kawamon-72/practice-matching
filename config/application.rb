@@ -17,7 +17,7 @@ module Myapp
     config.autoload_lib(ignore: %w[assets tasks])
 
     config.hosts << 'practice-matching.onrender.com'
-
+    config.hosts << "enjoy3150sports.com"
 
     # Configuration for the application, engines, and railties goes here.
     #
