@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post "oauth/callback" => "oauths#callback"
+  get "oauth/callback" => "oauths#callback" 
+  get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :practice_matches, only: [:index, :show, :new, :edit, :create, :update, :destroy] do
     resources :likes, only: %i[create]

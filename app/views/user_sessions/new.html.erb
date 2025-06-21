@@ -16,6 +16,14 @@
         </div>
         <%= f.submit "ログイン", class: "btn btn-primary" %>
       <% end %>
+      <div class="google-icon my-4">
+        <%= link_to auth_at_provider_path(provider: :google), class: "btn btn-light d-flex align-items-center justify-content-center gap-2 border shadow-sm mx-auto", style: "max-width: 250px;" do %>
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" width="20" height="20" style="object-fit: contain;">
+          <span>Googleでログイン</span>
+        <% end %>
+      </div>
+
+
       <div class='text-center'>
         <%= link_to '登録ページへ', new_user_path %>
         <%= link_to 'パスワードをお忘れの方はこちら', new_password_reset_path %>

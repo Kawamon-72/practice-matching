@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   before_action :require_login
   skip_before_action :require_login, if: :high_voltage_page?
-
+  
   private
 
   def high_voltage_page?
