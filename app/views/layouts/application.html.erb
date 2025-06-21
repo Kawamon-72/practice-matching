@@ -22,7 +22,7 @@
 
   <body>
     <% if current_user %>
-      <p>ログイン中：<%= current_user.profile.name %></p>
+      <p>ログイン中：<%= current_user.profile&.name || "未設定" %></p>
     <% else %>
       <p>ログインしていません</p>
     <% end %>

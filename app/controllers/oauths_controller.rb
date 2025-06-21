@@ -15,7 +15,7 @@ class OauthsController < ApplicationController
     else
       begin
         # ユーザーが存在しない場合はプロバイダ情報を元に新規ユーザーを作成し、ログイン
-        @user = signup_and_login(provider)
+        signup_and_login(provider)
         session[:user_id] = @user.id
         Rails.logger.debug "signup_and_loginでログイン成功: #{@user.inspect}"
         Rails.logger.debug "session[:user_id]: #{session[:user_id]}"
@@ -34,9 +34,8 @@ class OauthsController < ApplicationController
   end
 
   def signup_and_login(provider)
-    user = User.create_from(provider)
+    @user = create_from(provider)
     reset_session
-    auto_login(user)
-    user
+    auto_login(@user)
   end
 end

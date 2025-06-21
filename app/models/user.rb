@@ -33,31 +33,4 @@ class User < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["profile"]
   end
-
-  def self.create_from(provider)
-    auth = get_authentication_info(provider)
-
-    user = User.new(email: auth[:email])
-    user.save!
-
-    user.create_profile(name: auth[:name]) if user.persisted?
-
-    user.authentications.create!(
-      provider: provider,
-      uid: auth[:uid]
-    )
-
-    user
-  end
-
-  def self.get_authentication_info(provider)
-    access_token = Sorcery::Controller::Config.send("build_access_token_for_#{provider}")
-    user_info = access_token.get("https://www.googleapis.com/oauth2/v3/userinfo").parsed
-
-    {
-      uid: user_info["sub"],
-      email: user_info["email"],
-      name: user_info["name"]
-    }
-  end
 end
